@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pillreminder/screens/confirmation_medication.dart';
 import 'package:pillreminder/screens/register_medication.dart';
@@ -18,31 +15,32 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: DateSelectorWidget()),
-      body:
-          CustomScrollView(physics: BouncingScrollPhysics(), slivers: <Widget>[
-        SliverFillRemaining(
-          hasScrollBody: true,
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                    itemCount: 10,
-                    padding: EdgeInsets.only(bottom: 60),
-                    itemBuilder: ((context, index) {
-                      return PillCard(
-                          name: 'Paracetamol $index gm',
-                          time: '8:00 AM',
-                          frequency: 'Daily',
-                          notes: 'Take with food',
-                          onPressed: () =>
-                              showConfirmMedicationBottomSheet(context));
-                    })),
+      appBar: AppBar(title: const DateSelectorWidget()),
+      body: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: <Widget>[
+            SliverFillRemaining(
+              hasScrollBody: true,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                        itemCount: 10,
+                        padding: const EdgeInsets.only(bottom: 60),
+                        itemBuilder: ((context, index) {
+                          return PillCard(
+                              name: 'Paracetamol $index gm',
+                              time: '8:00 AM',
+                              frequency: 'Daily',
+                              notes: 'Take with food',
+                              onPressed: () =>
+                                  showConfirmMedicationBottomSheet(context));
+                        })),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-      ]),
+            ),
+          ]),
       floatingActionButton: FloatingActionButton.large(
           onPressed: () {
             showAddMedicationBottomSheet(context);

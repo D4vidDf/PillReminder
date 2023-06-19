@@ -1,7 +1,6 @@
 // BottomSheet for adding a new medication
 
 import 'package:flutter/material.dart';
-import 'package:pillreminder/widgets/pill_card.dart';
 
 Future<dynamic> showAddMedicationBottomSheet(BuildContext context) {
   return showModalBottomSheet(
