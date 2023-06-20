@@ -29,7 +29,7 @@ class _PillCardState extends State<PillCard> {
       child: Container(
           margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
           width: double.infinity,
-          height: 110,
+          height: 100,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             color: Theme.of(context).colorScheme.surface,
@@ -50,8 +50,8 @@ class _PillCardState extends State<PillCard> {
                       borderRadius: BorderRadius.circular(12),
                       child: Image.network(
                         'https://picsum.photos/100',
-                        width: 100,
-                        height: 100,
+                        width: 80,
+                        height: 80,
                         fit: BoxFit.cover,
                       )),
                 ),
@@ -64,7 +64,10 @@ class _PillCardState extends State<PillCard> {
                       children: [
                         Text(
                           widget.name,
-                          style: Theme.of(context).textTheme.titleMedium,
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                         Text(
                           widget.frequency,
@@ -83,14 +86,16 @@ class _PillCardState extends State<PillCard> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        widget.time.substring(0, 5),
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      Text(
-                        widget.time.substring(5),
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
+                      Text(widget.time.substring(0, 5),
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                      Text(widget.time.substring(5),
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  )),
                     ],
                   ),
                 ),
