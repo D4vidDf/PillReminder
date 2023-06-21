@@ -43,7 +43,10 @@ class _DateSelectorWidgetState extends State<DateSelectorWidget> {
             width: 150,
             child: Text(
               showTodayIfTodayElseShowSelectedDay(selectedDate),
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  ),
               textAlign: TextAlign.center,
             ),
           ),

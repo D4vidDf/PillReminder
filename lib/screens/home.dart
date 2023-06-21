@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ])
-          : MedicationListScreen(),
+          : const MedicationListScreen(),
       floatingActionButton: FloatingActionButton.large(
           onPressed: () {
             showAddMedicationBottomSheet(context);

@@ -3,8 +3,8 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:pillreminder/services/navigation_service.dart';
 
+// ignore: must_be_immutable
 class MedicationChart extends StatefulWidget {
   MedicationChart(
       {super.key,
@@ -18,6 +18,7 @@ class MedicationChart extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() =>
+      // ignore: no_logic_in_create_state
       MedicationChartState(barBackgroundColor, barColor, touchedBarColor);
 }
 
@@ -27,16 +28,6 @@ class MedicationChartState extends State<MedicationChart> {
   final Duration animDuration = const Duration(milliseconds: 250);
 
   int touchedIndex = -1;
-
-  bool isPlaying = false;
-  List<Color> get availableColors => const <Color>[
-        Colors.purple,
-        Colors.yellow,
-        Colors.blue,
-        Colors.orange,
-        Colors.pink,
-        Colors.red,
-      ];
 
   Color barBackgroundColor;
   Color barColor;
@@ -53,10 +44,10 @@ class MedicationChartState extends State<MedicationChart> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                const Text(
+                Text(
                   'History',
                   style: TextStyle(
-                    color: Colors.green,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
@@ -67,7 +58,7 @@ class MedicationChartState extends State<MedicationChart> {
                 Text(
                   'Medication Taken This Week',
                   style: TextStyle(
-                    color: Colors.green.shade900,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -79,7 +70,7 @@ class MedicationChartState extends State<MedicationChart> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: BarChart(
-                      isPlaying ? randomData() : mainBarData(),
+                      mainBarData(),
                       swapAnimationDuration: animDuration,
                     ),
                   ),
@@ -90,26 +81,6 @@ class MedicationChartState extends State<MedicationChart> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Align(
-              alignment: Alignment.topRight,
-              child: IconButton(
-                icon: Icon(
-                  isPlaying ? Icons.pause : Icons.play_arrow,
-                  color: Colors.green,
-                ),
-                onPressed: () {
-                  setState(() {
-                    isPlaying = !isPlaying;
-                    if (isPlaying) {
-                      refreshState();
-                    }
-                  });
-                },
-              ),
-            ),
-          )
         ],
       ),
     );
@@ -123,13 +94,14 @@ class MedicationChartState extends State<MedicationChart> {
     double width = 22,
     List<int> showTooltips = const [],
   }) {
-    barColor ??= barColor;
+    barColor = Theme.of(context).colorScheme.onPrimaryContainer;
     return BarChartGroupData(
       x: x,
       barRods: [
         BarChartRodData(
           toY: isTouched ? y + 1 : y,
-          color: isTouched ? touchedBarColor : barColor,
+          color:
+              isTouched ? Theme.of(context).colorScheme.onBackground : barColor,
           width: width,
           borderSide: isTouched
               ? BorderSide(color: touchedBarColor)
@@ -137,7 +109,7 @@ class MedicationChartState extends State<MedicationChart> {
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
             toY: 20,
-            color: barBackgroundColor,
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
           ),
         ),
       ],
@@ -170,9 +142,9 @@ class MedicationChartState extends State<MedicationChart> {
     return BarChartData(
       barTouchData: BarTouchData(
         touchTooltipData: BarTouchTooltipData(
-          tooltipBgColor: Colors.blueGrey,
-          tooltipHorizontalAlignment: FLHorizontalAlignment.right,
-          tooltipMargin: -10,
+          tooltipBgColor: Theme.of(context).colorScheme.secondaryContainer,
+          tooltipHorizontalAlignment: FLHorizontalAlignment.center,
+          tooltipMargin: 20,
           getTooltipItem: (group, groupIndex, rod, rodIndex) {
             String weekDay;
             switch (group.x) {
@@ -202,8 +174,8 @@ class MedicationChartState extends State<MedicationChart> {
             }
             return BarTooltipItem(
               '$weekDay\n',
-              const TextStyle(
-                color: Colors.white,
+              TextStyle(
+                color: Theme.of(context).colorScheme.onSecondaryContainer,
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
               ),
@@ -211,7 +183,7 @@ class MedicationChartState extends State<MedicationChart> {
                 TextSpan(
                   text: (rod.toY - 1).toString(),
                   style: TextStyle(
-                    color: touchedBarColor,
+                    color: Theme.of(context).colorScheme.onSecondaryContainer,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -262,36 +234,36 @@ class MedicationChartState extends State<MedicationChart> {
   }
 
   Widget getTitles(double value, TitleMeta meta) {
-    const style = TextStyle(
-      color: Colors.black,
+    var style = TextStyle(
+      color: Theme.of(context).colorScheme.onSecondaryContainer,
       fontWeight: FontWeight.bold,
       fontSize: 14,
     );
     Widget text;
     switch (value.toInt()) {
       case 0:
-        text = const Text('M', style: style);
+        text = Text('M', style: style);
         break;
       case 1:
-        text = const Text('T', style: style);
+        text = Text('T', style: style);
         break;
       case 2:
-        text = const Text('W', style: style);
+        text = Text('W', style: style);
         break;
       case 3:
-        text = const Text('T', style: style);
+        text = Text('T', style: style);
         break;
       case 4:
-        text = const Text('F', style: style);
+        text = Text('F', style: style);
         break;
       case 5:
-        text = const Text('S', style: style);
+        text = Text('S', style: style);
         break;
       case 6:
-        text = const Text('S', style: style);
+        text = Text('S', style: style);
         break;
       default:
-        text = const Text('', style: style);
+        text = Text('', style: style);
         break;
     }
     return SideTitleWidget(
@@ -299,107 +271,5 @@ class MedicationChartState extends State<MedicationChart> {
       space: 16,
       child: text,
     );
-  }
-
-  BarChartData randomData() {
-    return BarChartData(
-      barTouchData: BarTouchData(
-        enabled: true,
-      ),
-      titlesData: FlTitlesData(
-        show: true,
-        bottomTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            getTitlesWidget: getTitles,
-            reservedSize: 38,
-          ),
-        ),
-        leftTitles: const AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: false,
-          ),
-        ),
-        topTitles: const AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: false,
-          ),
-        ),
-        rightTitles: const AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: false,
-          ),
-        ),
-      ),
-      borderData: FlBorderData(
-        show: false,
-      ),
-      barGroups: List.generate(7, (i) {
-        switch (i) {
-          case 0:
-            return makeGroupData(
-              0,
-              Random().nextInt(15).toDouble() + 6,
-              barColor:
-                  availableColors[Random().nextInt(availableColors.length)],
-            );
-          case 1:
-            return makeGroupData(
-              1,
-              Random().nextInt(15).toDouble() + 6,
-              barColor:
-                  availableColors[Random().nextInt(availableColors.length)],
-            );
-          case 2:
-            return makeGroupData(
-              2,
-              Random().nextInt(15).toDouble() + 6,
-              barColor:
-                  availableColors[Random().nextInt(availableColors.length)],
-            );
-          case 3:
-            return makeGroupData(
-              3,
-              Random().nextInt(15).toDouble() + 6,
-              barColor:
-                  availableColors[Random().nextInt(availableColors.length)],
-            );
-          case 4:
-            return makeGroupData(
-              4,
-              Random().nextInt(15).toDouble() + 6,
-              barColor:
-                  availableColors[Random().nextInt(availableColors.length)],
-            );
-          case 5:
-            return makeGroupData(
-              5,
-              Random().nextInt(15).toDouble() + 6,
-              barColor:
-                  availableColors[Random().nextInt(availableColors.length)],
-            );
-          case 6:
-            return makeGroupData(
-              6,
-              Random().nextInt(15).toDouble() + 6,
-              barColor:
-                  availableColors[Random().nextInt(availableColors.length)],
-            );
-          default:
-            return throw Error();
-        }
-      }),
-      gridData: const FlGridData(show: false),
-    );
-  }
-
-  Future<dynamic> refreshState() async {
-    setState(() {});
-    await Future<dynamic>.delayed(
-      animDuration + const Duration(milliseconds: 50),
-    );
-    if (isPlaying) {
-      await refreshState();
-    }
   }
 }

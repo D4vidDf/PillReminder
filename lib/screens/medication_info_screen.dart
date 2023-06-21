@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:pillreminder/widgets/medication_chart.dart';
 
-import '../widgets/medication_info_card.dart';
-
 class MedicationInfoScreen extends StatefulWidget {
   const MedicationInfoScreen(
       {super.key,
@@ -17,12 +15,11 @@ class MedicationInfoScreen extends StatefulWidget {
   final String notes;
 
   @override
-  State<MedicationInfoScreen> createState() =>
-      _MedicationInfoScreenState(name, frequency, notes);
+  State<MedicationInfoScreen> createState() => _MedicationInfoScreenState();
 }
 
 class _MedicationInfoScreenState extends State<MedicationInfoScreen> {
-  _MedicationInfoScreenState(String name, String frequency, String notes);
+  _MedicationInfoScreenState();
   @override
   Widget build(BuildContext context) {
     // screen using slivers for displaying medication information with a top app bar with a button to edit the medication information and a button to close screen. Also display graph of medication history.
@@ -59,9 +56,9 @@ class _MedicationInfoScreenState extends State<MedicationInfoScreen> {
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: Image.network(
-                        'https://picsum.photos/100',
-                        width: 120,
-                        height: 120,
+                        'https://picsum.photos/1080',
+                        width: double.infinity,
+                        height: 180,
                         fit: BoxFit.cover,
                       )),
                 ),
@@ -92,7 +89,9 @@ class _MedicationInfoScreenState extends State<MedicationInfoScreen> {
                         padding: const EdgeInsets.all(8.0),
                         child: Icon(
                           Icons.info_outline_rounded,
-                          color: Theme.of(context).colorScheme.onSurface,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSecondaryContainer,
                         ),
                       ),
                       Padding(
@@ -106,7 +105,14 @@ class _MedicationInfoScreenState extends State<MedicationInfoScreen> {
                                 width: 320,
                                 child: Text(
                                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nisl nisl aliquet nisl, eget aliquam ultricies, nisl nisl aliquet nisl',
-                                  style: Theme.of(context).textTheme.bodyLarge,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimaryContainer,
+                                      ),
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 3,
                                 ),
@@ -139,13 +145,15 @@ class _MedicationInfoScreenState extends State<MedicationInfoScreen> {
                     ],
                   ),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       // info icon
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Icon(
                           Icons.access_time_rounded,
-                          color: Theme.of(context).colorScheme.onSurface,
+                          color:
+                              Theme.of(context).colorScheme.onPrimaryContainer,
                         ),
                       ),
                       Padding(
@@ -153,22 +161,20 @@ class _MedicationInfoScreenState extends State<MedicationInfoScreen> {
                         child: Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
-                                margin: const EdgeInsets.only(bottom: 8),
-                                width: 320,
-                                child: Text(
-                                  'Frequency: ${widget.frequency}',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
-                                      ?.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 3,
-                                ),
+                              Text(
+                                'Frequency: ${widget.frequency}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimaryContainer,
+                                    ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
                               ),
                             ],
                           ),
@@ -183,7 +189,7 @@ class _MedicationInfoScreenState extends State<MedicationInfoScreen> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.primaryContainer,
                     boxShadow: [
                       BoxShadow(
                         color: Theme.of(context)
@@ -196,9 +202,10 @@ class _MedicationInfoScreenState extends State<MedicationInfoScreen> {
                     ],
                   ),
                   child: MedicationChart(
-                    barBackgroundColor: Theme.of(context).colorScheme.surface,
-                    barColor: Theme.of(context).colorScheme.primary,
-                    touchedBarColor: Theme.of(context).colorScheme.secondary,
+                    barBackgroundColor:
+                        Theme.of(context).colorScheme.secondaryContainer,
+                    barColor: Colors.white,
+                    touchedBarColor: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ],

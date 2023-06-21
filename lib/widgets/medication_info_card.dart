@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class MedicationInfoCard extends StatefulWidget {
   MedicationInfoCard(
       {super.key,
@@ -17,11 +18,11 @@ class MedicationInfoCard extends StatefulWidget {
 
   @override
   State<MedicationInfoCard> createState() =>
-      _MedicationInfoCardState(name, frequency, notes);
+      _MedicationInfoCardState();
 }
 
 class _MedicationInfoCardState extends State<MedicationInfoCard> {
-  _MedicationInfoCardState(String name, String frequency, String notes);
+  _MedicationInfoCardState();
 
   @override
   Widget build(BuildContext context) {
