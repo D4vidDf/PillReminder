@@ -49,9 +49,9 @@ class _PillCardState extends State<PillCard> {
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: Image.network(
-                        'https://picsum.photos/100',
-                        width: 80,
-                        height: 80,
+                        'https://picsum.photos/720',
+                        width: 100,
+                        height: 100,
                         fit: BoxFit.cover,
                       )),
                 ),
@@ -66,7 +66,7 @@ class _PillCardState extends State<PillCard> {
                           widget.name,
                           style: Theme.of(context)
                               .textTheme
-                              .titleLarge
+                              .titleMedium
                               ?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: Theme.of(context)
@@ -77,7 +77,7 @@ class _PillCardState extends State<PillCard> {
                         Text(widget.frequency,
                             style: Theme.of(context)
                                 .textTheme
-                                .titleSmall
+                                .bodyMedium
                                 ?.copyWith(
                                   color: Theme.of(context)
                                       .colorScheme
@@ -86,7 +86,7 @@ class _PillCardState extends State<PillCard> {
                         Text(widget.notes,
                             style: Theme.of(context)
                                 .textTheme
-                                .titleSmall
+                                .bodyMedium
                                 ?.copyWith(
                                   color: Theme.of(context)
                                       .colorScheme
@@ -102,16 +102,18 @@ class _PillCardState extends State<PillCard> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(widget.time.substring(0, 5),
-                          style:
-                              Theme.of(context).textTheme.titleLarge?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onPrimaryContainer,
-                                  )),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer,
+                              )),
                       Text(widget.time.substring(5),
                           style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
                                     fontWeight: FontWeight.bold,
                                     color: Theme.of(context)
                                         .colorScheme

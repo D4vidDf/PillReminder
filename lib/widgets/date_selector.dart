@@ -21,7 +21,9 @@ class _DateSelectorWidgetState extends State<DateSelectorWidget> {
               selectedDate = dayBeforeSelectedDate();
             });
           },
-          icon: const Icon(Icons.arrow_back_ios_rounded),
+          icon: Icon(Icons.arrow_back_ios_rounded,
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
+              size: 28),
         ),
         const SizedBox(width: 16),
         GestureDetector(
@@ -69,7 +71,11 @@ class _DateSelectorWidgetState extends State<DateSelectorWidget> {
               selectedDate = dayAfterSelectedDate();
             });
           },
-          icon: const Icon(Icons.arrow_forward_ios_rounded),
+          icon: Icon(
+            Icons.arrow_forward_ios_rounded,
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
+            size: 28,
+          ),
         ),
       ],
     );

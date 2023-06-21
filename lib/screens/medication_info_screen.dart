@@ -55,11 +55,14 @@ class _MedicationInfoScreenState extends State<MedicationInfoScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(12),
-                      child: Image.network(
-                        'https://picsum.photos/1080',
-                        width: double.infinity,
-                        height: 180,
-                        fit: BoxFit.cover,
+                      child: Hero(
+                        tag: widget.name,
+                        child: Image.network(
+                          'https://picsum.photos/1080',
+                          width: double.infinity,
+                          height: 180,
+                          fit: BoxFit.cover,
+                        ),
                       )),
                 ),
 

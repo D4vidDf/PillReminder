@@ -17,8 +17,7 @@ class MedicationInfoCard extends StatefulWidget {
   Function? onPressed;
 
   @override
-  State<MedicationInfoCard> createState() =>
-      _MedicationInfoCardState();
+  State<MedicationInfoCard> createState() => _MedicationInfoCardState();
 }
 
 class _MedicationInfoCardState extends State<MedicationInfoCard> {
@@ -31,7 +30,6 @@ class _MedicationInfoCardState extends State<MedicationInfoCard> {
       child: Container(
         margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
         width: double.infinity,
-        height: 100,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: Theme.of(context).colorScheme.surface,
@@ -49,11 +47,14 @@ class _MedicationInfoCardState extends State<MedicationInfoCard> {
               padding: const EdgeInsets.all(8.0),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.network(
-                    'https://picsum.photos/100',
-                    width: 80,
-                    height: 80,
-                    fit: BoxFit.cover,
+                  child: Hero(
+                    tag: widget.name,
+                    child: Image.network(
+                      'https://picsum.photos/1080',
+                      width: 120,
+                      height: 120,
+                      fit: BoxFit.cover,
+                    ),
                   )),
             ),
             Padding(
@@ -66,15 +67,26 @@ class _MedicationInfoCardState extends State<MedicationInfoCard> {
                     Text(widget.name,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.bold,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onPrimaryContainer,
                             )),
-                    Text(
-                      widget.frequency,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Text(
-                      widget.notes,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
+                    Text(widget.frequency,
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimaryContainer,
+                                )),
+                    Text(widget.notes,
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimaryContainer,
+                                )),
                   ],
                 ),
               ),

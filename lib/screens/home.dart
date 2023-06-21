@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pillreminder/screens/confirmation_medication.dart';
+import 'package:pillreminder/bottomsheet/confirmation_medication.dart';
 import 'package:pillreminder/screens/medication_list_screen.dart';
-import 'package:pillreminder/screens/register_medication.dart';
+import 'package:pillreminder/bottomsheet/register_medication.dart';
 import 'package:pillreminder/widgets/date_selector.dart';
 import 'package:pillreminder/widgets/pill_card.dart';
 
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                               padding: const EdgeInsets.only(bottom: 60),
                               itemBuilder: ((context, index) {
                                 return PillCard(
-                                    name: 'Paracetamol $index gm',
+                                    name: 'Medication $index',
                                     time: '8:00 AM',
                                     frequency: 'Daily',
                                     notes: 'Take with food',
